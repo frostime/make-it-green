@@ -12,7 +12,7 @@ if ! git diff --quiet action-commit origin/main; then
   echo "Bad! action-commit is not up to date with main, rebasing..."
   git rebase origin/main
   if [ $? -ne 0 ]; then
-    echo "Rebase 失败，请手动处理冲突。"
+    echo "Rebase failed, please resolve conflicts manually."
     exit 1
   fi
 else
@@ -22,7 +22,7 @@ fi
 
 git commit --allow-empty -m "🤖 Automatically generated commit on $(date +'%Y-%m-%d %H:%M:%S')"
 
-if git push origin action-commit; then
+if git push --force origin action-commit; then
   echo "Push successful!"
   exit 0
 else
