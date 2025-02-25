@@ -1,3 +1,11 @@
+name: Daily Commit
+
+on:
+  schedule:
+    # 每天 UTC 时间 00:00 触发（北京时间 08:00）
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
 jobs:
   commit:
     runs-on: ubuntu-latest
