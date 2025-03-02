@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git config user.name "GitHub Actions"
-git config user.email "actions@github.com"
+git config user.name "frostime"
+git config user.email "frostime@foxmail.com"
 
 
 git checkout -B action-commit
