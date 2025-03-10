@@ -19,6 +19,9 @@ else
   echo "Good! action-commit is up to date with main."
 fi
 
+# 添加一个微小的实际更改而不是空提交
+echo "$(date +'%Y-%m-%d %H:%M:%S')" > last-update.txt
+git add last-update.txt
 
 git commit --allow-empty -m "🤖 Automatically generated commit on $(date +'%Y-%m-%d %H:%M:%S')"
 
