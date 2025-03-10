@@ -3,20 +3,28 @@
 git config user.name "frostime"
 git config user.email "frostime@foxmail.com"
 
+# Check if there are any unstaged changes
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    echo "Found unstaged changes, stashing them..."
+    git stash push -m "Temporary stash before rebase"
+    CHANGES_STASHED=true
+else
+    CHANGES_STASHED=false
+fi
 
 git checkout -B action-commit
 
 git fetch origin main
 
 if ! git diff --quiet action-commit origin/main; then
-  echo "Bad! action-commit is not up to date with main, rebasing..."
-  git rebase origin/main
-  if [ $? -ne 0 ]; then
-    echo "Rebase failed, please resolve conflicts manually."
-    exit 1
-  fi
+    echo "Bad! action-commit is not up to date with main, rebasing..."
+    git rebase origin/main
+    if [ $? -ne 0 ]; then
+        echo "Rebase failed, please resolve conflicts manually."
+        exit 1
+    fi
 else
-  echo "Good! action-commit is up to date with main."
+    echo "Good! action-commit is up to date with main."
 fi
 
 # 添加一个微小的实际更改而不是空提交
